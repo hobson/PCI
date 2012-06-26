@@ -3,16 +3,16 @@ from BeautifulSoup import *
 from urlparse import urljoin
 from pysqlite2 import dbapi2 as sqlite
 import nn
-import bitcrawl.Bot as Bot
+from bitcrawl import Bot
 mynet=nn.searchnet('nn.db')
 
 # Create a list of words to ignore
 ignorewords={'the':1,'of':1,'to':1,'and':1,'a':1,'in':1,'is':1,'it':1}
 
 
-class crawler: # (Bot):
+class Crawler: # (Bot):
   # Initialize the crawler with the name of database
-  def __init__(self,dbname):
+  def __init__(self,dbname='searchindex.db'):
     self.con=sqlite.connect(dbname)
   
   def __del__(self):
@@ -100,7 +100,7 @@ class crawler: # (Bot):
 #          continue
 #        try:
       for page in pages:
-        page_str=Bot().GET(url)
+        page_str=Crawler().GET(url)
         soup=BeautifulSoup(page_str)
         self.addtoindex(page,soup)
 

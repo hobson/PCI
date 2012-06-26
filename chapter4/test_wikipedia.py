@@ -1,7 +1,8 @@
 from pysqlite2.dbapi2 import OperationalError
 import searchengine as se
 #bot = se.crawler('') # doesn't work
-bot = se.crawler('searchindex.db')
+from bitcrawl import Bot
+bot = se.Bot()
 try:
     bot.createindextables()
 except OperationalError:
