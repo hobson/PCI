@@ -33,12 +33,10 @@ class crawler: # (Bot):
       return cur.lastrowid
     else:
       return res[0] 
-
   # Index an individual page
   def addtoindex(self,url,soup):
     if self.isindexed(url): return
     print 'Indexing '+url
-
     # Get the individual words
     text=self.gettextonly(soup)
     words=self.separatewords(text)
@@ -52,7 +50,6 @@ class crawler: # (Bot):
       if word in ignorewords: continue
       wordid=self.getentryid('wordlist','word',word)
       self.con.execute("insert into wordlocation(urlid,wordid,location) values (%d,%d,%d)" % (urlid,wordid,i))
-
   # Extract the text from an HTML page (no tags)
   def gettextonly(self,soup):
     v=soup.string
@@ -121,7 +118,6 @@ class crawler: # (Bot):
       self.dbcommit()
 #        except:
 #          print "Could not parse page %s" % page
-
       pages=newpages
 
   
